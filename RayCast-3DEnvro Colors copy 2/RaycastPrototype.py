@@ -16,7 +16,7 @@ Grid[1][0] = 1
 Grid[2][0] = 1
 
 
-
+Turn = 55
 
 def GetDis(Start, End):
     NewTup = (Start[0] - End[0], Start[1] - End[1])
@@ -29,7 +29,7 @@ def Draw3D():
     Grid[StX][StY] = -2
     #print(np.array(Grid))
 
-    for i in range(55, 126):
+    for i in range(Turn, Turn+161):
         Index =  (i*1) * (math.pi/180) # (105 - (i-75))
 
         Found = False
@@ -75,7 +75,7 @@ def Draw3D():
                 
                 DisToEnd = round(GetDis((StX, StY), TrueHit), 10)
 
-                DrawInd = ((i*1) - 55) * 7
+                DrawInd = ((i*1) - Turn) * 7
 
                 #if i == 135:
 
@@ -106,6 +106,13 @@ StY = 10
 
 uioj = 9
 
+
+
+Controls = [-1, 1, -1, 1]
+
+
+
+
 run = True
 while(run):
     pygame.time.delay(45)
@@ -117,20 +124,28 @@ while(run):
 
     keys = pygame.key.get_pressed()
 
+    if keys[pygame.K_a]:
+        Turn -= 5
+        Draw3D()
+
+    if keys[pygame.K_d]:
+        Turn += 5
+        Draw3D()
+
     if keys[pygame.K_LEFT] and not Grid[StX][StY - 1] >= 1:
-        StY -= 1
+        StY += Controls[0]
         Draw3D()
 
     if keys[pygame.K_RIGHT] and not Grid[StX][StY + 1] >= 1:
-        StY += 1
+        StY += Controls[1]
         Draw3D()
 
     if keys[pygame.K_UP] and not Grid[StX - 1][StY] >= 1:
-        StX -= 1
+        StX += Controls[2]
         Draw3D()
 
     if keys[pygame.K_DOWN] and not Grid[StX + 1][StY] >= 1:
-        StX += 1
+        StX += Controls[3]
         Draw3D()
 
     if uioj == 9:
