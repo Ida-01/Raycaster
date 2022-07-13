@@ -55,6 +55,8 @@ def Draw3D():
                         colo2 = (0,0,100)
 
                 TimesNumber -= 0.5
+                SubtNum = 0.2
+                timer = 0
                 while not Found:
                     Xget = StX - round(math.sin(Index) * TimesNumber)
                     Yget = StY - round(math.cos(Index) * TimesNumber)
@@ -63,7 +65,12 @@ def Draw3D():
                         Found = True
 
                     Saved = ((StX - math.sin(Index) * TimesNumber), (StY - math.cos(Index) * TimesNumber))
-                    TimesNumber += 0.001
+                    if(SubtNum > 0.05):
+                        SubtNum = SubtNum * 0.05
+                    TimesNumber += SubtNum
+                    timer += 1
+
+                print(timer)
 
                 TrueHit = ((StX - math.sin(Index) * TimesNumber), (StY - math.cos(Index) * TimesNumber))
 
